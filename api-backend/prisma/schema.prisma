@@ -1,0 +1,28 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id      Int       @id @default(autoincrement())
+  nome    String
+  cpf     String    @unique
+  Contact Contact[]
+}
+
+model Contact {
+  id        Int         @id @default(autoincrement())
+  tipo      ContactType
+  descricao String
+  userId    Int
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum ContactType {
+  TELEFONE
+  EMAIL
+}
