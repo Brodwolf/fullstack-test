@@ -164,6 +164,7 @@ export default class ViewUserModal extends Vue {
       handleServiceError(err, "Falha ao buscar a lista de contatos");
     } finally {
       this.loadingContactList = false;
+      console.log(this.contactList);
     }
   }
 }
